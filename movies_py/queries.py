@@ -18,6 +18,7 @@ class MovieType(DjangoObjectType):
 class Query(graphene.ObjectType):
     all_movies = graphene.List(MovieType)
     movies_by_genre = graphene.List(MovieType, genre=graphene.String(required=True))
+    all_genres = graphene.List(GenreType)
 
     def resolve_all_movies(self, info):
         return Movie.objects.all()

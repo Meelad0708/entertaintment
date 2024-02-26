@@ -34,6 +34,8 @@ class CreateMovie(graphene.Mutation):
             raise ValidationError('Movie Title Cannot Be Empty')
         if Movie.objects.filter(title=title).exists():
             raise ValidationError('Movie Already Exists')
+        if not genre_id:
+            raise ValidationError('Genre does not exist')
 
         genre = Genre.objects.get(pk=genre_id)
         movie = Movie.objects.create(title=title, genre=genre, rating=rating, release=release, description=description)
